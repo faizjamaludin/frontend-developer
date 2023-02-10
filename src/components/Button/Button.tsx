@@ -7,7 +7,7 @@ type BtnProps = {
 
 function Button(props: BtnProps) {
   return (
-    <button>
+    <button type="submit">
       <span className="button_top">{props.text}</span>
     </button>
   );
