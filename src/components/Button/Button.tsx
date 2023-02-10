@@ -1,10 +1,14 @@
 import React from "react";
 import "./button.css";
 
-function Button() {
+type BtnProps = {
+  text: string;
+}
+
+function Button(props: BtnProps) {
   return (
     <button>
-      <span className="button_top"> Button</span>
+      <span className="button_top">{props.text}</span>
     </button>
   );
 }

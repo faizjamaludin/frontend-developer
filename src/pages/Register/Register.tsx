@@ -28,7 +28,7 @@ function Register() {
           <input required name="" type="password" />
           <label>Confirm Password</label>
         </div>
-        <Button />
+        <Button text="Sign Up" />
       </form>
     </div>
   );
