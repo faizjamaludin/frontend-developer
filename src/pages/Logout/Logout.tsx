@@ -10,7 +10,7 @@ const LOGOUT_MUTATION = gql`
   }
 `;
 
-function Home() {
+function Logout() {
   const [logout, setLogout] = useState("");
 
   const logoutToken = localStorage.getItem("token");
@@ -49,4 +49,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default Logout;

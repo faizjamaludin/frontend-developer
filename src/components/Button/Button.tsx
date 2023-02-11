@@ -3,11 +3,11 @@ import "./button.css";
 
 type BtnProps = {
   text: string;
-}
+};
 
 function Button(props: BtnProps) {
   return (
-    <button type="submit">
+    <button>
       <span className="button_top">{props.text}</span>
     </button>
   );
