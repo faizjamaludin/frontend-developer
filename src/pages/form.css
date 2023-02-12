@@ -88,3 +88,10 @@
   text-decoration: none;
   color: var(--primary-color);
 }
+
+.loader-container {
+  margin-top: 30px;
+  text-align: start;
+  display: flex;
+  justify-content: center;
+}

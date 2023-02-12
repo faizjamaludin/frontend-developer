@@ -170,7 +170,7 @@ function Register() {
             <div className="form-input">
               <label htmlFor="name">Email</label>
               <input
-                type="text"
+                type="email"
                 id="email"
                 name="email"
                 placeholder="johndoe@gmail.com"
@@ -222,7 +222,7 @@ function Register() {
               )}
             </div>
             <div className="form-btn">
-              <Button text="Sign up" />
+              <Button btnType="submit" text="Sign up" />
               <p>
                 Have an account ? <a href="/login">Sign in</a>
               </p>

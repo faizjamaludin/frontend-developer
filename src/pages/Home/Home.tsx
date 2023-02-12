@@ -1,51 +1,30 @@
-import React, { useState } from "react";
-import { gql, useMutation } from "@apollo/client";
+import React, { useState, useEffect } from "react";
 
-const LOGOUT_MUTATION = gql`
-  mutation {
-    logout {
-      status
-      message
-    }
-  }
-`;
+import { redirect } from "react-router-dom";
+import TopNav from "../../components/Navigation/TopNav";
+import "./home.css";
 
-function Home() {
+interface HomeProps {
+  isAuthorized: string | null;
+}
+
+function Home({ isAuthorized }: HomeProps) {
   const [logout, setLogout] = useState("");
-
   const logoutToken = localStorage.getItem("token");
+  // const navigate = useNavigate();
 
-  const [logoutMutation, { data, error }] = useMutation(LOGOUT_MUTATION, {
-    context: {
-      headers: {
-        Authorization: `Bearer ${logoutToken}`,
-      },
-    },
-  });
-
-  if (error) {
-    console.error(error);
-  }
-
-  if (data) {
-    console.log(data);
-  }
+  useEffect(() => {
+    if (isAuthorized === null) {
+      redirect("/login");
+    }
+  }, [isAuthorized]);
 
   return (
-    <button
-      onClick={() => {
-        logoutMutation()
-          .then(({ data }) => {
-            localStorage.removeItem("token");
-            setLogout(data.logout.status);
-          })
-          .catch((error) => {
-            console.error(error);
-          });
-      }}
-    >
-      Logout
-    </button>
+    <div className="container">
+      <div className="header">
+        <TopNav isAuthorized={isAuthorized} />
+      </div>
+    </div>
   );
 }
 

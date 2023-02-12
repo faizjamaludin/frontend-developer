@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "../form.css";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Button from "../../components/Button/Button";
 import { gql, useMutation } from "@apollo/client";
 import Loader from "../../components/Loader/Loader";
@@ -43,18 +43,25 @@ function Login() {
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const navigate = useNavigate();
 
   //start sending mutation
   const [login, { data, loading, error }] = useMutation(LOGIN_MUTATION);
 
   //useEffec hook to make sure login() is executed and data is exist then can proceed to store token
+  const token = localStorage.getItem("token");
   useEffect(() => {
     if (data && data.login) {
       localStorage.setItem("token", data.login.token);
       setIsSubmitting(false);
       console.log(data, loading, error?.message);
+      console.log(token);
     }
-  }, [data]);
+
+    if (token) {
+      navigate("/", { replace: true, state: { isAuthorized: token } });
+    }
+  }, [data, token]);
 
   // everytime user onChange in input, the value will capture
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -145,7 +152,7 @@ function Login() {
               )}
             </div>
             {loading ? (
-              <div className="form-btn">
+              <div className="loader-container">
                 <Loader />
               </div>
             ) : (
