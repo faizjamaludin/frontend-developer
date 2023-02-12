@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-import { redirect } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import TopNav from "../../components/Navigation/TopNav";
 import "./home.css";
 
@@ -9,15 +9,11 @@ interface HomeProps {
 }
 
 function Home({ isAuthorized }: HomeProps) {
-  const [logout, setLogout] = useState("");
-  const logoutToken = localStorage.getItem("token");
-  // const navigate = useNavigate();
-
   useEffect(() => {
     if (isAuthorized === null) {
-      redirect("/login");
+      <Navigate to="/login" />;
     }
-  }, [isAuthorized]);
+  }, []);
 
   return (
     <div className="container">

@@ -21,7 +21,7 @@ function App() {
     <BrowserRouter>
       <div className="App">
         <Routes>
-          <Route element={<ProtectedRoute />}>
+          <Route element={<ProtectedRoute isAuthorized={token} />}>
             <Route path="/" element={<Home isAuthorized={token} />} />
           </Route>
           <Route path="login" element={<Login />} />
