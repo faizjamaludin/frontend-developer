@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Button from "../../components/Button/Button";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { gql, useMutation } from "@apollo/client";
 import "../form.css";
 
@@ -59,6 +59,7 @@ function Register() {
     cPasswordError: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const navigate = useNavigate();
 
   const [register, { data, loading, error }] = useMutation(REGISTER_MUTATION);
 
@@ -66,6 +67,7 @@ function Register() {
     if (data) {
       setIsSubmitting(false);
       console.log(data, loading, error?.message);
+      navigate('/login', { replace: true })
     }
   }, [data]);
 

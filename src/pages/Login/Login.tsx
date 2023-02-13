@@ -54,14 +54,17 @@ function Login() {
     if (data && data.login) {
       localStorage.setItem("token", data.login.token);
       setIsSubmitting(false);
-      console.log(data, loading, error?.message);
-      console.log(token);
+      // console.log(data, loading, error?.message);
     }
 
     if (token) {
       navigate("/", { replace: true, state: { isAuthorized: token } });
     }
   }, [data, token]);
+
+  // if (token) {
+  //   navigate("/", { replace: true, state: { isAuthorized: token } });
+  // }
 
   // everytime user onChange in input, the value will capture
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {

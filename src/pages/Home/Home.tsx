@@ -9,11 +9,9 @@ interface HomeProps {
 }
 
 function Home({ isAuthorized }: HomeProps) {
-  useEffect(() => {
-    if (isAuthorized === null) {
-      <Navigate to="/login" />;
-    }
-  }, []);
+  // if (isAuthorized === null) {
+  //   <Navigate to="/login" />;
+  // }
 
   return (
     <div className="container">
