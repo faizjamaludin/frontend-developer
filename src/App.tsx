@@ -4,7 +4,7 @@ import Home from "./pages/Home/Home";
 import Register from "./pages/Register/Register";
 import Login from "./pages/Login/Login";
 import NotFound from "./pages/NotFound/NotFound";
-import ProtectedRoute from "./Utils/ProtectedRoute";
+import ProtectedRoute from "./utils/ProtectedRoute";
 
 function App() {
   const token = localStorage.getItem("token");

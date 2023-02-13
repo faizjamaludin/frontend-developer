@@ -2,8 +2,9 @@ import React, { useState, useEffect } from "react";
 import "../form.css";
 import { useNavigate } from "react-router-dom";
 import Button from "../../components/Button/Button";
-import { gql, useMutation } from "@apollo/client";
 import Loader from "../../components/Loader/Loader";
+
+import { useLoginMutation } from "../../hooks/useMutation";
 
 // set the interface type for the input
 interface FormData {
@@ -23,18 +24,6 @@ const initialFormData: FormData = {
   password: "",
 };
 
-// mutation query
-const LOGIN_MUTATION = gql`
-  mutation Login($userMobile: String!, $password: String!) {
-    login(input: { user_mobile: $userMobile, password: $password }) {
-      token
-      user {
-        user_id
-      }
-    }
-  }
-`;
-
 function Login() {
   const [formData, setFormData] = useState<FormData>(initialFormData);
   const [formErrors, setFormErrors] = useState<FormError>({
@@ -46,7 +35,7 @@ function Login() {
   const navigate = useNavigate();
 
   //start sending mutation
-  const [login, { data, loading, error }] = useMutation(LOGIN_MUTATION);
+  const { login, data, loading, error } = useLoginMutation();
 
   //useEffec hook to make sure login() is executed and data is exist then can proceed to store token
   const token = localStorage.getItem("token");
@@ -61,10 +50,6 @@ function Login() {
       navigate("/", { replace: true, state: { isAuthorized: token } });
     }
   }, [data, token]);
-
-  // if (token) {
-  //   navigate("/", { replace: true, state: { isAuthorized: token } });
-  // }
 
   // everytime user onChange in input, the value will capture
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {

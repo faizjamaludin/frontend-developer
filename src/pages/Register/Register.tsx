@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import Button from "../../components/Button/Button";
 import { useNavigate } from "react-router-dom";
-import { gql, useMutation } from "@apollo/client";
 import "../form.css";
+
+import { useRegisterMutation } from "../../hooks/useMutation";
 
 // set the interface type for the input
 interface FormData {
@@ -31,24 +32,6 @@ const initialFormData: FormData = {
   cPassword: "",
 };
 
-const REGISTER_MUTATION = gql`
-  mutation Logout(
-    $fullName: String!
-    $email: String!
-    $mobile: String!
-    $password: String!
-  ) {
-    register(
-      input: {
-        user_fullname: $fullName
-        user_email: $email
-        user_mobile: $mobile
-        password: $password
-      }
-    )
-  }
-`;
-
 function Register() {
   const [formData, setFormData] = useState<FormData>(initialFormData);
   const [formErrors, setFormErrors] = useState<FormError>({
@@ -61,13 +44,13 @@ function Register() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
 
-  const [register, { data, loading, error }] = useMutation(REGISTER_MUTATION);
+  const { register, data, loading, error } = useRegisterMutation();
 
   useEffect(() => {
     if (data) {
       setIsSubmitting(false);
       console.log(data, loading, error?.message);
-      navigate('/login', { replace: true })
+      navigate("/login", { replace: true });
     }
   }, [data]);
 

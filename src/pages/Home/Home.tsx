@@ -16,7 +16,7 @@ function Home({ isAuthorized }: HomeProps) {
   return (
     <div className="container">
       <div className="header">
-        <TopNav isAuthorized={isAuthorized} />
+        <TopNav />
       </div>
     </div>
   );
