@@ -5,6 +5,7 @@ import Register from "./pages/Register/Register";
 import Login from "./pages/Login/Login";
 import NotFound from "./pages/NotFound/NotFound";
 import ProtectedRoute from "./utils/ProtectedRoute";
+import Footer from "./components/Footer/Footer";
 
 function App() {
   const token = localStorage.getItem("token");
@@ -20,6 +21,7 @@ function App() {
           <Route path="register" element={<Register />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
+        {/* <Footer /> */}
       </div>
     </BrowserRouter>
   );

@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Button from "../../components/Button/Button";
 import { useNavigate } from "react-router-dom";
-import "../form.css";
+import styles from "./register.module.css";
+import Loader from "../../components/Loader/Loader";
 
 import { useRegisterMutation } from "../../hooks/useMutation";
 
@@ -46,13 +47,23 @@ function Register() {
 
   const { register, data, loading, error } = useRegisterMutation();
 
+  const obj = Object.values(
+    (error?.graphQLErrors[0]?.extensions?.validation ?? {}) as Record<
+      string,
+      unknown
+    >
+  );
+
   useEffect(() => {
     if (data) {
       setIsSubmitting(false);
-      console.log(data, loading, error?.message);
-      navigate("/login", { replace: true });
+      console.log(data, loading, error);
+
+      setTimeout(() => {
+        navigate("/login", { replace: true });
+      }, 3000);
     }
-  }, [data]);
+  }, [data, error]);
 
   // everytime user onChange in input, the value will capture and store in formData
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -90,6 +101,10 @@ function Register() {
       cPasswordError = "Please insert the confirmation password";
     }
 
+    if (formData.password.length < 8) {
+      passwordError = "The password must be at least 8 characters";
+    }
+
     if (formData.password !== formData.cPassword) {
       passwordError = "Password does not match";
       cPasswordError = "Password does not match";
@@ -116,6 +131,7 @@ function Register() {
 
     if (isValid) {
       setIsSubmitting(true);
+
       register({
         variables: {
           fullName: formData.mobile,
@@ -128,91 +144,144 @@ function Register() {
   };
 
   return (
-    <div className="wrapper">
-      <div className="login-box">
-        <div className="login-form">
-          <form onSubmit={handleSubmit}>
-            <div className="form-header">
-              <div className="form-header">
-                <h1>Register</h1>
-                {error && <p className="err-msg">{error.message}</p>}
+    <div className={styles.container}>
+      <div className={styles.mainContainer}>
+        <div>
+          <h1 className={styles.textBrand_h1}>Front End</h1>
+          <h1 className={`${styles.textBrand_h1} ${styles.textBrand_h1_2}`}>
+            Developer
+          </h1>
+        </div>
+
+        <div>
+          <p className={styles.textTagline_p}>Where all the journey begins</p>
+        </div>
+
+        <div className={styles.mainImage}>
+          <img className={styles.mainImage_img} src="img/peeps1.png" alt="" />
+          <img className={styles.mainImage_img} src="img/peeps2.png" alt="" />
+        </div>
+      </div>
+      {/* box right side */}
+      <div className={styles.registerContainer}>
+        <div className={styles.registerBox}>
+          {data && (
+            <div className={styles.successMsg}>
+              <i className="fa fa-check"></i> {data.register}
+            </div>
+          )}
+
+          <div className={styles.registerForm}>
+            <form onSubmit={handleSubmit}>
+              <div className={styles.formHeader}>
+                <h1 className={styles.formHeader_h1}>Register</h1>
+                {error &&
+                  (obj as [string, unknown][]).map(([key, value]) => (
+                    <p className={styles.errMsg} key={key}>
+                      {key}: {JSON.stringify(value)}
+                    </p>
+                  ))}
               </div>
-            </div>
-            <div className="form-input">
-              <label htmlFor="name">Full Name</label>
-              <input
-                type="text"
-                id="full_name"
-                name="fullName"
-                placeholder="John Doe"
-                value={formData.fullName}
-                onChange={handleChange}
-              />
-              {formErrors.fullNameError && (
-                <p className="err-msg">{formErrors.fullNameError}</p>
+              <div className={styles.formInput}>
+                <label className={styles.formInput_label} htmlFor="name">
+                  Full Name
+                </label>
+                <input
+                  className={styles.formInput_input}
+                  type="text"
+                  id="full_name"
+                  name="fullName"
+                  placeholder="John Doe"
+                  value={formData.fullName}
+                  onChange={handleChange}
+                />
+                {formErrors.fullNameError && (
+                  <p className={styles.errMsg}>{formErrors.fullNameError}</p>
+                )}
+              </div>
+              <div className={styles.formInput}>
+                <label className={styles.formInput_label} htmlFor="name">
+                  Email
+                </label>
+                <input
+                  className={styles.formInput_input}
+                  type="email"
+                  id="email"
+                  name="email"
+                  placeholder="johndoe@gmail.com"
+                  value={formData.email}
+                  onChange={handleChange}
+                />
+                {formErrors.emailError && (
+                  <p className={styles.errMsg}>{formErrors.emailError}</p>
+                )}
+              </div>
+              <div className={styles.formInput}>
+                <label className={styles.formInput_label} htmlFor="name">
+                  Mobile
+                </label>
+                <input
+                  className={styles.formInput_input}
+                  type="text"
+                  id="mobile"
+                  name="mobile"
+                  placeholder="60134567890"
+                  value={formData.mobile}
+                  onChange={handleChange}
+                />
+                {formErrors.mobileError && (
+                  <p className={styles.errMsg}>{formErrors.mobileError}</p>
+                )}
+              </div>
+              <div className={styles.formInput}>
+                <label className={styles.formInput_label} htmlFor="name">
+                  Password
+                </label>
+                <input
+                  className={styles.formInput_input}
+                  type="password"
+                  id="password"
+                  name="password"
+                  value={formData.password}
+                  onChange={handleChange}
+                />
+                {formErrors.passwordError && (
+                  <p className={styles.errMsg}>{formErrors.passwordError}</p>
+                )}
+              </div>
+              <div className={styles.formInput}>
+                <label className={styles.formInput_label} htmlFor="name">
+                  Confirm Password
+                </label>
+                <input
+                  className={styles.formInput_input}
+                  type="password"
+                  id="cpassword"
+                  name="cPassword"
+                  value={formData.cPassword}
+                  onChange={handleChange}
+                />
+                {formErrors.cPasswordError && (
+                  <p className={styles.errMsg}>{formErrors.cPasswordError}</p>
+                )}
+              </div>
+              {loading ? (
+                <div className={styles.loaderContainer}>
+                  <Loader />
+                </div>
+              ) : (
+                <div className={styles.formBtn}>
+                  <Button btnType="submit" text="Sign up" />
+                  <p className={styles.formBtn_p}>
+                    Have an account ?{" "}
+                    <a className={styles.formBtn_a} href="/login">
+                      Sign in
+                    </a>
+                  </p>
+                </div>
               )}
-            </div>
-            <div className="form-input">
-              <label htmlFor="name">Email</label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                placeholder="johndoe@gmail.com"
-                value={formData.email}
-                onChange={handleChange}
-              />
-              {formErrors.emailError && (
-                <p className="err-msg">{formErrors.emailError}</p>
-              )}
-            </div>
-            <div className="form-input">
-              <label htmlFor="name">Mobile</label>
-              <input
-                type="text"
-                id="mobile"
-                name="mobile"
-                placeholder="60134567890"
-                value={formData.mobile}
-                onChange={handleChange}
-              />
-              {formErrors.mobileError && (
-                <p className="err-msg">{formErrors.mobileError}</p>
-              )}
-            </div>
-            <div className="form-input">
-              <label htmlFor="name">Password</label>
-              <input
-                type="password"
-                id="password"
-                name="password"
-                value={formData.password}
-                onChange={handleChange}
-              />
-              {formErrors.passwordError && (
-                <p className="err-msg">{formErrors.passwordError}</p>
-              )}
-            </div>
-            <div className="form-input">
-              <label htmlFor="name">Confirm Password</label>
-              <input
-                type="password"
-                id="cpassword"
-                name="cPassword"
-                value={formData.cPassword}
-                onChange={handleChange}
-              />
-              {formErrors.cPasswordError && (
-                <p className="err-msg">{formErrors.cPasswordError}</p>
-              )}
-            </div>
-            <div className="form-btn">
-              <Button btnType="submit" text="Sign up" />
-              <p>
-                Have an account ? <a href="/login">Sign in</a>
-              </p>
-            </div>
-          </form>
+            </form>
+          </div>
         </div>
       </div>
     </div>

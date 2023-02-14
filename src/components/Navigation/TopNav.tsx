@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import "./topnav.css";
+import React, { useEffect, createContext, useContext } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
+import styles from "./topnav.module.css";
 import { gql, useMutation } from "@apollo/client";
 
 import { Link } from "react-router-dom";
@@ -18,14 +18,19 @@ const LOGOUT_MUTATION = gql`
 function TopNav() {
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
+  const location = useLocation();
+  const path = location.pathname;
 
-  const [logoutMutation, { data, error }] = useMutation(LOGOUT_MUTATION, {
-    context: {
-      headers: {
-        Authorization: `Bearer ${token}`,
+  const [logoutMutation, { data, loading, error }] = useMutation(
+    LOGOUT_MUTATION,
+    {
+      context: {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       },
-    },
-  });
+    }
+  );
 
   useEffect(() => {
     if (data && data.logout) {
@@ -46,15 +51,24 @@ function TopNav() {
   };
 
   return (
-    <nav className="navbar">
-      <h3 className="logo">Logo</h3>
+    <nav className={styles.navbar}>
+      <h3 className={styles.logo}>Logo</h3>
 
-      <ul className="nav-links">
-        <li>
-          <Link to="/">Home</Link>
+      <ul className={styles.navLinks}>
+        <li className={styles.navLinks_li}>
+          <Link
+            className={
+              path == "/" ? styles.navLinks_li_a_active : styles.navLinks_li_a
+            }
+            to="/"
+          >
+            Home
+          </Link>
         </li>
-        <li>
-          <Link to="/">Cart</Link>
+        <li className={styles.navLinks_li}>
+          <Link className={styles.navLinks_li_a} to="/">
+            Cart
+          </Link>
         </li>
       </ul>
 

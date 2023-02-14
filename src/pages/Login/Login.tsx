@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "../form.css";
+import styles from "./login.module.css";
 import { useNavigate } from "react-router-dom";
 import Button from "../../components/Button/Button";
 import Loader from "../../components/Loader/Loader";
@@ -36,6 +36,14 @@ function Login() {
 
   //start sending mutation
   const { login, data, loading, error } = useLoginMutation();
+  const obj = Object.values(
+    (error?.graphQLErrors[0]?.extensions?.validation ?? {}) as Record<
+      string,
+      unknown
+    >
+  );
+
+  console.log(error?.graphQLErrors[0]?.extensions?.validation);
 
   //useEffec hook to make sure login() is executed and data is exist then can proceed to store token
   const token = localStorage.getItem("token");
@@ -49,7 +57,7 @@ function Login() {
     if (token) {
       navigate("/", { replace: true, state: { isAuthorized: token } });
     }
-  }, [data, token]);
+  }, [data, token, error]);
 
   // everytime user onChange in input, the value will capture
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -104,54 +112,89 @@ function Login() {
   };
 
   return (
-    <div className="wrapper">
-      <div className="login-box">
-        <div className="login-form">
-          <form onSubmit={handleSubmit}>
-            <div className="form-header">
-              <h1>Login</h1>
-              {error && <p className="err-msg">{error.message}</p>}
-            </div>
-            <div className="form-input">
-              <label htmlFor="name">Mobile</label>
-              <input
-                type="text"
-                id="mobile"
-                name="mobile"
-                placeholder="60134567890"
-                value={formData.mobile}
-                onChange={handleChange}
-              />
-              {formErrors.mobileError && (
-                <p className="err-msg">{formErrors.mobileError}</p>
-              )}
-            </div>
-            <div className="form-input">
-              <label htmlFor="name">Password</label>
-              <input
-                type="password"
-                id="password"
-                name="password"
-                value={formData.password}
-                onChange={handleChange}
-              />
-              {formErrors.passwordError && (
-                <p className="err-msg">{formErrors.passwordError}</p>
-              )}
-            </div>
-            {loading ? (
-              <div className="loader-container">
-                <Loader />
+    <div className={styles.container}>
+      <div className={styles.mainContainer}>
+        <div>
+          <h1 className={styles.textBrand_h1}>Front End</h1>
+          <h1 className={`${styles.textBrand_h1} ${styles.textBrand_h1_2}`}>
+            Developer
+          </h1>
+        </div>
+
+        <div>
+          <p className={styles.textTagline_p}>Where all the journey begins</p>
+        </div>
+
+        <div className={styles.mainImage}>
+          <img className={styles.mainImage_img} src="img/peeps1.png" alt="" />
+          <img className={styles.mainImage_img} src="img/peeps2.png" alt="" />
+        </div>
+      </div>
+      <div className={styles.loginContainer}>
+        <div className={styles.loginBox}>
+          <div className={styles.loginForm}>
+            <form onSubmit={handleSubmit}>
+              <div className={styles.formHeader}>
+                <h1 className={styles.formHeader_h1}>Login</h1>
+                {/* {error && <p className={styles.errMsg}>{error.message}</p>} */}
+                {/* {obj
+                  ? (obj as [string, unknown][]).map(([key, value]) => (
+                      <p className={styles.errMsg} key={key}>
+                        {key}: {JSON.stringify(value)}
+                      </p>
+                    ))
+                  : error?.message} */}
               </div>
-            ) : (
-              <div className="form-btn">
-                <Button text="Sign In" />
-                <p>
-                  Don't have an account ? <a href="/register">Sign up!</a>
-                </p>
+              <div className={styles.formInput}>
+                <label className={styles.formInput_label} htmlFor="name">
+                  Mobile
+                </label>
+                <input
+                  className={styles.formInput_input}
+                  type="text"
+                  id="mobile"
+                  name="mobile"
+                  placeholder="60134567890"
+                  value={formData.mobile}
+                  onChange={handleChange}
+                />
+                {formErrors.mobileError && (
+                  <p className={styles.errMsg}>{formErrors.mobileError}</p>
+                )}
               </div>
-            )}
-          </form>
+              <div className={styles.formInput}>
+                <label className={styles.formInput_label} htmlFor="name">
+                  Password
+                </label>
+                <input
+                  className={styles.formInput_input}
+                  type="password"
+                  id="password"
+                  name="password"
+                  value={formData.password}
+                  onChange={handleChange}
+                />
+                {formErrors.passwordError && (
+                  <p className={styles.errMsg}>{formErrors.passwordError}</p>
+                )}
+              </div>
+              {loading ? (
+                <div className={styles.loaderContainer}>
+                  <Loader />
+                </div>
+              ) : (
+                <div className={styles.formBtn}>
+                  <Button text="Sign In" />
+                  <p className={styles.formBtn_p}>
+                    Don't have an account ?{" "}
+                    <a className={styles.formBtn_a} href="/register">
+                      Sign up!
+                    </a>
+                  </p>
+                </div>
+              )}
+            </form>
+          </div>
         </div>
       </div>
     </div>

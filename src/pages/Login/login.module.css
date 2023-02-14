@@ -1,0 +1,207 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* ############ main container left side ############ */
+
+.mainContainer {
+  display: flex;
+  width: 50%;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.textBrand_h1 {
+  color: var(--secondary-color);
+  font-size: 100px;
+  letter-spacing: 1px;
+  font-weight: 900;
+  text-align: center;
+  -webkit-text-stroke-width: 3px;
+  -webkit-text-stroke-color: black;
+  text-shadow: 10px 8px var(--primary-color);
+}
+
+.textBrand_h1_2 {
+  margin-top: -100px;
+}
+
+.textTagline_p {
+  font-family: "Roboto Mono", monospace;
+  font-size: 30px;
+  font-weight: 500;
+  overflow: hidden; /* Ensures the content is not revealed until the animation */
+  border-right: 0.15em solid var(--primary-color); /* The typwriter cursor */
+  white-space: nowrap; /* Keeps the content on a single line */
+  margin: 0 auto; /* Gives that scrolling effect as the typing happens */
+  letter-spacing: 0.15em; /* Adjust as needed */
+  animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+}
+
+/* The typing effect */
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+/* The typewriter cursor effect */
+@keyframes blink-caret {
+  from,
+  to {
+    border-color: transparent;
+  }
+  50% {
+    border-color: var(--primary-color);
+  }
+}
+
+.mainImage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.mainImage_img {
+  width: 300px;
+}
+
+/* ############ Login container right side ############ */
+.loginContainer {
+  display: flex;
+  width: 50%;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Whole box styling */
+.loginBox {
+  width: 300px;
+  border: 2px solid var(--primary-color);
+  border-bottom: 5px solid var(--primary-color);
+  border-radius: 10px;
+  padding: 40px;
+  margin-inline: auto;
+}
+
+/* Form styling */
+.loginForm {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header styling */
+.formHeader_h1 {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.formHeader_p {
+  margin-bottom: 10px;
+}
+
+/* Input styling */
+.formInput {
+  display: flex;
+  flex-direction: column;
+  margin: 5px;
+}
+
+.formInput_label {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.formInput_input {
+  border: 1px solid var(--primary-color);
+  padding: 7px 5px;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.formInput_input:focus::placeholder {
+  color: transparent;
+}
+
+::placeholder {
+  opacity: 0.5;
+}
+
+.errMsg {
+  font-size: 12px;
+  color: red;
+}
+
+/* Button styling */
+.formBtn {
+  margin-top: 30px;
+  text-align: start;
+  display: flex;
+  justify-content: space-between;
+}
+
+.formBtn_btn {
+  width: 40%;
+}
+
+.formBtn_p {
+  font-size: 14px;
+  width: 50%;
+}
+
+.formBtn_a {
+  font-weight: 600;
+  text-decoration: none;
+  color: var(--primary-color);
+}
+
+.loaderContainer {
+  margin-top: 30px;
+  text-align: start;
+  display: flex;
+  justify-content: center;
+}
+
+/* ############ Media Queries ############ */
+@media only screen and (max-width: 1024px) {
+  .textBrand_h1 {
+    font-size: 70px;
+    text-shadow: 5px 7px var(--primary-color);
+  }
+
+  .textBrand_h1_2 {
+    margin-top: -70px;
+  }
+
+  .textTagline_p {
+    font-size: 20px;
+  }
+
+  .mainImage_img {
+    width: 200px;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .mainContainer {
+    width: 100%;
+  }
+
+  .loginContainer {
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+}

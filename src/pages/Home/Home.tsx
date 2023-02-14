@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 
 import { Navigate } from "react-router-dom";
 import TopNav from "../../components/Navigation/TopNav";
-import "./home.css";
+import styles from "./home.module.css";
 
 interface HomeProps {
   isAuthorized: string | null;
