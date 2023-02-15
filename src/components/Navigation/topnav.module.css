@@ -2,11 +2,10 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 60px;
-  padding: 20px;
+  height: 70px;
+  padding: 10px 20px;
   border: 2px solid var(--primary-color);
   border-radius: 0 0 10px 10px;
-  /* box-shadow: 0px 5px 20px -10px rgba(0, 0, 0, 0.75); */
 }
 
 .logo {
@@ -22,9 +21,13 @@
 .navLinks_li {
   list-style-type: none;
   margin: 0 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.navLinks_li_a {
+.navLinks_li_a,
+.navLinks_logo {
   text-decoration: none;
   font-weight: 600;
   color: var(--primary-color);
@@ -40,4 +43,40 @@
 .navLinks_li_a:hover {
   color: rgba(0, 0, 0, 0.5);
   transition: all 0.2s ease;
+}
+
+.mobileMenu {
+  border: none;
+  background: none;
+  font-size: 30px;
+  display: none;
+}
+
+@media only screen and (max-width: 768px) {
+  .navLinks,
+  .logOutBtn {
+    display: none;
+  }
+
+  .mobileMenu {
+    position: absolute;
+    background-color: var(--secondary-color);
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+    list-style: none;
+    right: 10px;
+    z-index: 1000;
+    transition: all 0.5s ease-in-out;
+    text-align: center;
+  }
+
+  .navLinks_li {
+    margin-top: 10px;
+    padding: 10px;
+    width: 100%;
+    transition: all 0.5s ease-in-out;
+    text-align: center;
+    width: 100%;
+  }
 }

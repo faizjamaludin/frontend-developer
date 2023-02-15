@@ -5,23 +5,19 @@ import Register from "./pages/Register/Register";
 import Login from "./pages/Login/Login";
 import NotFound from "./pages/NotFound/NotFound";
 import ProtectedRoute from "./utils/ProtectedRoute";
-import Footer from "./components/Footer/Footer";
 
 function App() {
-  const token = localStorage.getItem("token");
-
   return (
     <BrowserRouter>
       <div className="App">
         <Routes>
           <Route element={<ProtectedRoute />}>
-            <Route path="/" element={<Home isAuthorized={token} />} />
+            <Route path="/" element={<Home />} />
           </Route>
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
-        {/* <Footer /> */}
       </div>
     </BrowserRouter>
   );

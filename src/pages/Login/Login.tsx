@@ -43,16 +43,12 @@ function Login() {
     >
   );
 
-
-  console.log(error?.graphQLErrors[0]?.extensions?.validation);
-
   //useEffec hook to make sure login() is executed and data is exist then can proceed to store token
   const token = localStorage.getItem("token");
   useEffect(() => {
     if (data && data.login) {
       localStorage.setItem("token", data.login.token);
       setIsSubmitting(false);
-      // console.log(data, loading, error?.message);
     }
 
     if (token) {
@@ -137,15 +133,18 @@ function Login() {
             <form onSubmit={handleSubmit}>
               <div className={styles.formHeader}>
                 <h1 className={styles.formHeader_h1}>Login</h1>
-                {/* {error && } */}
-                {obj.length > 1
-                  ? (obj as [string, unknown][]).map(([key, value]) => (
+                {/* check if error object length more than 0 */}
+                {obj.length > 0 ? (
+                  (obj as [string, unknown][]).map(([key, value]) => (
                     <p className={styles.errMsg} key={key}>
                       {key}: {JSON.stringify(value)}
                     </p>
                   ))
-                  : <p className={styles.errMsg}>{error?.message}</p>}
+                ) : (
+                  <p className={styles.errMsg}>{error?.message}</p>
+                )}
               </div>
+              {/* mobile input */}
               <div className={styles.formInput}>
                 <label className={styles.formInput_label} htmlFor="name">
                   Mobile
@@ -163,6 +162,7 @@ function Login() {
                   <p className={styles.errMsg}>{formErrors.mobileError}</p>
                 )}
               </div>
+              {/* password input */}
               <div className={styles.formInput}>
                 <label className={styles.formInput_label} htmlFor="name">
                   Password
@@ -179,6 +179,7 @@ function Login() {
                   <p className={styles.errMsg}>{formErrors.passwordError}</p>
                 )}
               </div>
+              {/* start loading if data loading change to true */}
               {loading ? (
                 <div className={styles.loaderContainer}>
                   <Loader />

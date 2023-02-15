@@ -1,10 +1,12 @@
-import React, { useEffect, createContext, useContext } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import styles from "./topnav.module.css";
 import { gql, useMutation } from "@apollo/client";
 
 import { Link } from "react-router-dom";
 import Button from "../Button/Button";
+import { GiHamburgerMenu } from "react-icons/gi";
+import { RxCross2 } from "react-icons/rx";
 
 const LOGOUT_MUTATION = gql`
   mutation {
@@ -20,6 +22,8 @@ function TopNav() {
   const token = localStorage.getItem("token");
   const location = useLocation();
   const path = location.pathname;
+
+  const [mobile, setMobile] = useState(false);
 
   const [logoutMutation, { data, loading, error }] = useMutation(
     LOGOUT_MUTATION,
@@ -52,9 +56,13 @@ function TopNav() {
 
   return (
     <nav className={styles.navbar}>
-      <h3 className={styles.logo}>Logo</h3>
+      <h3 className={styles.logo}>
+        <Link className={styles.navLinks_logo} to="/">
+          Logo
+        </Link>
+      </h3>
 
-      <ul className={styles.navLinks}>
+      <ul className={mobile ? styles.mobileMenu : styles.navLinks}>
         <li className={styles.navLinks_li}>
           <Link
             className={
@@ -80,11 +88,16 @@ function TopNav() {
             Reporting
           </Link>
         </li>
+        <li className={styles.navLinks_li}>
+          <Button onclick={handleLogout} text="Logout" />
+        </li>
       </ul>
 
-      <div className="">
-        <Button onclick={handleLogout} text="Logout" />
-      </div>
+      {/* <div className={styles.logOutBtn}></div> */}
+
+      <button onClick={() => setMobile(!mobile)} className={styles.mobileMenu}>
+        {mobile ? <RxCross2 className={styles.icon} /> : <GiHamburgerMenu />}
+      </button>
     </nav>
   );
 }

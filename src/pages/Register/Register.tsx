@@ -47,6 +47,7 @@ function Register() {
 
   const { register, data, loading, error } = useRegisterMutation();
 
+  // declare error from extensions validation to object
   const obj = Object.values(
     (error?.graphQLErrors[0]?.extensions?.validation ?? {}) as Record<
       string,
@@ -57,7 +58,6 @@ function Register() {
   useEffect(() => {
     if (data) {
       setIsSubmitting(false);
-      console.log(data, loading, error);
 
       setTimeout(() => {
         navigate("/login", { replace: true });
@@ -132,6 +132,7 @@ function Register() {
     if (isValid) {
       setIsSubmitting(true);
 
+      // execute register mutation
       register({
         variables: {
           fullName: formData.mobile,
@@ -175,6 +176,8 @@ function Register() {
             <form onSubmit={handleSubmit}>
               <div className={styles.formHeader}>
                 <h1 className={styles.formHeader_h1}>Register</h1>
+
+                {/* if error occur, display error value from api */}
                 {error &&
                   (obj as [string, unknown][]).map(([key, value]) => (
                     <p className={styles.errMsg} key={key}>

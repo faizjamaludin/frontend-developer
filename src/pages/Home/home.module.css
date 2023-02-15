@@ -1,0 +1,187 @@
+.container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.header {
+  width: 100%;
+}
+
+.welcomeContainer {
+  width: 100%;
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 40px;
+}
+
+.welcomeBox {
+  width: 80%;
+  height: 100%;
+  background-color: rgba(112, 112, 112, 0.1);
+  border: 2px solid var(--primary-color);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: row;
+}
+
+.text_h2 {
+  font-weight: 600;
+}
+
+.text_h4 {
+  font-weight: 600;
+  text-align: start;
+}
+
+/* ############### Image container ############### */
+.welcomeImg {
+  width: 20%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.welcomeImg_img {
+  width: 250px;
+}
+
+/* ############### Welcome text container ############### */
+
+.welcomeText {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  padding: 30px;
+}
+
+.welcomeText_p {
+  margin-top: 10px;
+}
+
+.btnBox {
+  margin-top: 20px;
+}
+
+.btnStyle {
+  margin: 0 10px;
+}
+
+/* ############### Recent project ############### */
+
+.projectContainer {
+  width: 80%;
+  display: flex;
+  justify-content: center;
+  margin: 40px 0;
+  flex-direction: column;
+}
+
+.projectBox {
+  width: 100%;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.recentProject {
+  width: 200px;
+  height: 250px;
+  border: 2px solid var(--primary-color);
+  border-radius: 10px;
+  margin: 30px 20px;
+  padding: 10px;
+  transition: transform 0.1s ease;
+  display: block;
+  text-align: center;
+  cursor: pointer;
+}
+
+.recentProject:hover {
+  transform: translate(-0.33em, -0.2em);
+  box-shadow: 10px 10px 5px 0px rgba(112, 112, 112, 0.2);
+}
+
+.recentProject_img {
+  height: 150px;
+}
+
+.recentProject_p {
+  text-align: start;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.recentProject_created {
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* ############ Footer ############ */
+.footer {
+  width: 100%;
+  display: flex;
+}
+
+/* ############ Media Queries ############ */
+
+@media only screen and (max-width: 1200px) {
+  .welcomeImg_img {
+    width: 200px;
+  }
+}
+@media only screen and (max-width: 1440px) {
+  .text_h2 {
+    font-weight: 600;
+    font-size: 20px;
+  }
+
+  .welcomeContainer {
+    height: 350px;
+  }
+
+  .welcomeText_p {
+    font-size: 15px;
+  }
+
+  .welcomeImg {
+    width: 30%;
+  }
+
+  .welcomeImg_img {
+    width: 200px;
+  }
+
+  .welcomeText {
+    width: 70%;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .welcomeContainer {
+    height: 350px;
+  }
+  .welcomeImg {
+    display: none;
+  }
+
+  .welcomeText {
+    width: 100%;
+  }
+
+  .projectBox {
+    justify-content: center;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .welcomeContainer {
+    height: 400px;
+  }
+}

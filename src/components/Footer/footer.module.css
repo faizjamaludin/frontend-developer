@@ -1,0 +1,19 @@
+.container {
+  width: 100%;
+}
+
+.footerBox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+  border: 2px solid var(--primary-color);
+  border-radius: 10px 10px 0 0;
+}
+
+.footerRights {
+  display: block;
+  text-align: center;
+  font-size: small;
+  margin: auto 0;
+}
