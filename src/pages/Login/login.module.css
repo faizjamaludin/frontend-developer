@@ -34,11 +34,16 @@
   font-family: "Roboto Mono", monospace;
   font-size: 30px;
   font-weight: 500;
-  overflow: hidden; /* Ensures the content is not revealed until the animation */
-  border-right: 0.15em solid var(--primary-color); /* The typwriter cursor */
-  white-space: nowrap; /* Keeps the content on a single line */
-  margin: 0 auto; /* Gives that scrolling effect as the typing happens */
-  letter-spacing: 0.15em; /* Adjust as needed */
+  overflow: hidden;
+  /* Ensures the content is not revealed until the animation */
+  border-right: 0.15em solid var(--primary-color);
+  /* The typwriter cursor */
+  white-space: nowrap;
+  /* Keeps the content on a single line */
+  margin: 0 auto;
+  /* Gives that scrolling effect as the typing happens */
+  letter-spacing: 0.15em;
+  /* Adjust as needed */
   animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
 }
 
@@ -47,6 +52,7 @@
   from {
     width: 0;
   }
+
   to {
     width: 100%;
   }
@@ -54,10 +60,12 @@
 
 /* The typewriter cursor effect */
 @keyframes blink-caret {
+
   from,
   to {
     border-color: transparent;
   }
+
   50% {
     border-color: var(--primary-color);
   }
@@ -171,9 +179,11 @@
 
 /* ############ Media Queries ############ */
 @media only screen and (max-width: 1024px) {
+
   .textBrand_h1 {
     font-size: 70px;
     text-shadow: 5px 7px var(--primary-color);
+    margin-top: 70px;
   }
 
   .textBrand_h1_2 {
@@ -203,5 +213,4 @@
   }
 }
 
-@media only screen and (max-width: 480px) {
-}
+@media only screen and (max-width: 480px) {}

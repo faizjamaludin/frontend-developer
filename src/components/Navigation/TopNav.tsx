@@ -67,7 +67,17 @@ function TopNav() {
         </li>
         <li className={styles.navLinks_li}>
           <Link className={styles.navLinks_li_a} to="/">
-            Cart
+            Projects
+          </Link>
+        </li>
+        <li className={styles.navLinks_li}>
+          <Link className={styles.navLinks_li_a} to="/">
+            Tasks
+          </Link>
+        </li>
+        <li className={styles.navLinks_li}>
+          <Link className={styles.navLinks_li_a} to="/">
+            Reporting
           </Link>
         </li>
       </ul>

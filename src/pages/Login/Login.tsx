@@ -43,6 +43,7 @@ function Login() {
     >
   );
 
+
   console.log(error?.graphQLErrors[0]?.extensions?.validation);
 
   //useEffec hook to make sure login() is executed and data is exist then can proceed to store token
@@ -136,14 +137,14 @@ function Login() {
             <form onSubmit={handleSubmit}>
               <div className={styles.formHeader}>
                 <h1 className={styles.formHeader_h1}>Login</h1>
-                {/* {error && <p className={styles.errMsg}>{error.message}</p>} */}
-                {/* {obj
+                {/* {error && } */}
+                {obj.length > 1
                   ? (obj as [string, unknown][]).map(([key, value]) => (
-                      <p className={styles.errMsg} key={key}>
-                        {key}: {JSON.stringify(value)}
-                      </p>
-                    ))
-                  : error?.message} */}
+                    <p className={styles.errMsg} key={key}>
+                      {key}: {JSON.stringify(value)}
+                    </p>
+                  ))
+                  : <p className={styles.errMsg}>{error?.message}</p>}
               </div>
               <div className={styles.formInput}>
                 <label className={styles.formInput_label} htmlFor="name">
