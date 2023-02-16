@@ -42,12 +42,14 @@ const LOGOUT_MUTATION = gql`
   }
 `;
 
+// function for Login Mutation
 export const useLoginMutation = () => {
   const [login, { data, loading, error }] = useMutation(LOGIN_MUTATION);
 
   return { login, data, loading, error };
 };
 
+// function for Registration Mutation
 export const useRegisterMutation = () => {
   const [register, { data, loading, error }] = useMutation(REGISTER_MUTATION);
 

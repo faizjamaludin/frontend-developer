@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 
 import { Navigate } from "react-router-dom";
 import TopNav from "../../components/Navigation/TopNav";
+import Navbar from "../../components/Navigation/Navbar";
 import styles from "./home.module.css";
 import Button from "../../components/Button/Button";
 import Footer from "../../components/Footer/Footer";
@@ -10,7 +11,13 @@ function Home() {
   return (
     <div className={styles.container}>
       <div className={styles.header}>
-        <TopNav />
+        <Navbar
+          links={[
+            { name: 'Home', path: '/' },
+            { name: 'Projects', path: '/project' },
+            { name: 'Tasks', path: '/task' },
+          ]}
+        />
       </div>
       {/* Welcome section */}
       <section className={styles.welcomeContainer}>
