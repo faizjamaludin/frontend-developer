@@ -13,14 +13,16 @@ function App() {
     <BrowserRouter>
       <div className="App">
         <Routes>
+          <Route path="login" element={<Login />} />
+          <Route path="register" element={<Register />} />
+          <Route path="*" element={<NotFound />} />
+
+          {/* Protected Route */}
           <Route element={<ProtectedRoute />}>
             <Route path="/" element={<Home />} />
             <Route path="/project" element={<Project />} />
             <Route path="/task" element={<Task />} />
           </Route>
-          <Route path="login" element={<Login />} />
-          <Route path="register" element={<Register />} />
-          <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
     </BrowserRouter>

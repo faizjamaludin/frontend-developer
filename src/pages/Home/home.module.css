@@ -72,6 +72,10 @@
   margin: 0 10px;
 }
 
+.btnSpace {
+  margin: 0 10px;
+}
+
 /* ############### Recent project ############### */
 
 .projectContainer {
@@ -136,6 +140,7 @@
     width: 200px;
   }
 }
+
 @media only screen and (max-width: 1440px) {
   .text_h2 {
     font-weight: 600;
@@ -167,6 +172,7 @@
   .welcomeContainer {
     height: 350px;
   }
+
   .welcomeImg {
     display: none;
   }
