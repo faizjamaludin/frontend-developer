@@ -4,6 +4,7 @@ interface AuthProp {
   isAuthorized: string | null;
 }
 
+// mutation for login
 const LOGIN_MUTATION = gql`
   mutation Login($userMobile: String!, $password: String!) {
     login(input: { user_mobile: $userMobile, password: $password }) {
@@ -15,6 +16,7 @@ const LOGIN_MUTATION = gql`
   }
 `;
 
+// create a mutation for registration
 const REGISTER_MUTATION = gql`
   mutation Logout(
     $fullName: String!
@@ -33,6 +35,7 @@ const REGISTER_MUTATION = gql`
   }
 `;
 
+// mutation for logout
 const LOGOUT_MUTATION = gql`
   mutation {
     logout {
@@ -56,6 +59,7 @@ export const useRegisterMutation = () => {
   return { register, data, loading, error };
 };
 
+// function for logout mutation
 export const useLogoutMutation = (isAuthorized: AuthProp) => {
   const [logoutMutation, { data, loading, error }] = useMutation(
     LOGOUT_MUTATION,

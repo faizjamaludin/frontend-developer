@@ -6,7 +6,7 @@ import Login from "./pages/Login/Login";
 import Project from "./pages/Project/Project";
 import Task from "./pages/Task/Task";
 import NotFound from "./pages/NotFound/NotFound";
-import ProtectedRoute from "./utils/ProtectedRoute";
+// import ProtectedRoute from "./utils/ProtectedRoute";
 
 function App() {
   return (
@@ -17,12 +17,12 @@ function App() {
           <Route path="register" element={<Register />} />
           <Route path="*" element={<NotFound />} />
 
+          <Route path="/" element={<Home />} />
+          <Route path="/project" element={<Project />} />
+          <Route path="/task" element={<Task />} />
+
           {/* Protected Route */}
-          <Route element={<ProtectedRoute />}>
-            <Route path="/" element={<Home />} />
-            <Route path="/project" element={<Project />} />
-            <Route path="/task" element={<Task />} />
-          </Route>
+          {/* <Route element={<ProtectedRoute />}></Route> */}
         </Routes>
       </div>
     </BrowserRouter>
